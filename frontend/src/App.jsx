@@ -8,6 +8,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import TripDetailsPage from "./pages/TripDetailsPage";
+import TripFormPage from "./pages/TripFormPage";
 
 function App() {
   return (
@@ -30,6 +32,21 @@ function App() {
         <Route
           path="/dashboard"
           element={<DashboardPage />}
+        />
+
+        <Route
+          path="/trips/new"
+          element={<TripFormPage />}
+        />
+
+        <Route
+          path="/trips/:tripId"
+          element={<TripDetailsPage />}
+        />
+
+        <Route
+          path="/trips/:tripId/edit"
+          element={<TripFormPage />}
         />
       </Route>
 
