@@ -6,6 +6,7 @@ import { rateLimit } from "express-rate-limit";
 
 import authRoutes from "./routes/authRoutes.js";
 import healthRoutes from "./routes/healthRoutes.js";
+import tripRoutes from "./routes/tripRoutes.js";
 import {
   errorHandler,
   notFound,
@@ -44,6 +45,7 @@ app.use("/api", apiLimiter);
 // API routes
 app.use("/api/health", healthRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/trips", tripRoutes);
 
 // Error-handling middleware must remain last.
 app.use(notFound);
