@@ -17,6 +17,20 @@ WanderList is a full-stack MERN travel itinerary planner. Users can securely cre
 - Loading states, form validation, and API error messages
 - Modern interface with reusable React components
 
+## Screenshots
+
+### Dashboard
+
+The dashboard displays user-specific trip statistics, search controls, filters, sorting, and responsive trip cards.
+
+![WanderList dashboard](docs/screenshots/dashboard.png)
+
+### Trip Details and Live Weather
+
+The trip-details page combines saved MongoDB trip data, itinerary activities, and a live Open-Meteo forecast.
+
+![WanderList trip details and weather](docs/screenshots/trip-details.png)
+
 ## Technology Stack
 
 ### Frontend
