@@ -4,8 +4,12 @@ import cookieParser from "cookie-parser";
 import helmet from "helmet";
 import { rateLimit } from "express-rate-limit";
 
+import authRoutes from "./routes/authRoutes.js";
 import healthRoutes from "./routes/healthRoutes.js";
-import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
+import {
+  errorHandler,
+  notFound,
+} from "./middleware/errorMiddleware.js";
 
 const app = express();
 
@@ -39,6 +43,7 @@ app.use("/api", apiLimiter);
 
 // API routes
 app.use("/api/health", healthRoutes);
+app.use("/api/auth", authRoutes);
 
 // Error-handling middleware must remain last.
 app.use(notFound);
