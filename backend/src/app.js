@@ -7,6 +7,8 @@ import { rateLimit } from "express-rate-limit";
 import authRoutes from "./routes/authRoutes.js";
 import healthRoutes from "./routes/healthRoutes.js";
 import tripRoutes from "./routes/tripRoutes.js";
+import weatherRoutes from "./routes/weatherRoutes.js";
+
 import {
   errorHandler,
   notFound,
@@ -25,7 +27,7 @@ app.use(
   })
 );
 
-// Read JSON and form data from incoming requests.
+// Read JSON and form data.
 app.use(express.json({ limit: "10kb" }));
 app.use(express.urlencoded({ extended: true }));
 
@@ -46,8 +48,9 @@ app.use("/api", apiLimiter);
 app.use("/api/health", healthRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/trips", tripRoutes);
+app.use("/api/weather", weatherRoutes);
 
-// Error-handling middleware must remain last.
+// Error middleware must remain last.
 app.use(notFound);
 app.use(errorHandler);
 
