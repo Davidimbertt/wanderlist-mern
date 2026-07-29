@@ -29,6 +29,15 @@ const userSchema = new mongoose.Schema(
       minlength: [8, "Password must contain at least 8 characters"],
       select: false,
     },
+
+    role: {
+      type: String,
+      enum: {
+        values: ["user", "admin"],
+        message: "{VALUE} is not a valid user role",
+      },
+      default: "user",
+    },
   },
   {
     timestamps: true,
@@ -41,6 +50,9 @@ const userSchema = new mongoose.Schema(
   }
 );
 
+// Support administrator user-list queries.
+userSchema.index({ role: 1, createdAt: -1 });
+
 // Hash a new or changed password before saving it.
 userSchema.pre("save", async function () {
   if (!this.isModified("password")) {
@@ -51,7 +63,9 @@ userSchema.pre("save", async function () {
 });
 
 // Compare a login password with the saved hash.
-userSchema.methods.comparePassword = async function (candidatePassword) {
+userSchema.methods.comparePassword = async function (
+  candidatePassword
+) {
   return bcrypt.compare(candidatePassword, this.password);
 };
 

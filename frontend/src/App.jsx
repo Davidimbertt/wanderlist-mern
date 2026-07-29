@@ -4,7 +4,9 @@ import {
   Routes,
 } from "react-router";
 
+import AdminRoute from "./components/AdminRoute";
 import ProtectedRoute from "./components/ProtectedRoute";
+import AdminDashboardPage from "./pages/AdminDashboardPage";
 import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -48,6 +50,13 @@ function App() {
           path="/trips/:tripId/edit"
           element={<TripFormPage />}
         />
+
+        <Route element={<AdminRoute />}>
+          <Route
+            path="/admin"
+            element={<AdminDashboardPage />}
+          />
+        </Route>
       </Route>
 
       <Route

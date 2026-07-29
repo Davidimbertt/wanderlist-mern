@@ -9,6 +9,7 @@ const formatUser = (user) => ({
   id: user._id,
   name: user.name,
   email: user.email,
+  role: user.role || "user",
   createdAt: user.createdAt,
 });
 
@@ -99,5 +100,5 @@ export const getCurrentUser = async (req, res) => {
   res.status(200).json({
     success: true,
     user: formatUser(req.user),
-  });
+    });
 };

@@ -30,6 +30,15 @@ function AppHeader() {
             My trips
           </Link>
 
+          {user?.role === "admin" && (
+            <Link
+              className="header-link header-admin-link"
+              to="/admin"
+            >
+              Admin
+            </Link>
+          )}
+
           <span className="header-name">
             Hello, {user?.name}
           </span>

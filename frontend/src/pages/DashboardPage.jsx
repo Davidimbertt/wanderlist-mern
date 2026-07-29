@@ -1,5 +1,6 @@
 import {
   useEffect,
+  useRef,
   useState,
 } from "react";
 import { Link } from "react-router";
@@ -22,6 +23,8 @@ const emptyStats = {
 function DashboardPage() {
   const { user } = useAuth();
 
+  const tripsSectionRef = useRef(null);
+
   const [trips, setTrips] = useState([]);
   const [stats, setStats] = useState(emptyStats);
   const [loading, setLoading] = useState(true);
@@ -33,7 +36,9 @@ function DashboardPage() {
     sort: "startDate",
   });
 
-  const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] =
+    useState("");
+
   const [appliedSearch, setAppliedSearch] =
     useState("");
 
@@ -118,6 +123,15 @@ function DashboardPage() {
     });
   };
 
+  const showTripInformation = () => {
+    window.requestAnimationFrame(() => {
+      tripsSectionRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+  };
+
   return (
     <div className="app-shell">
       <AppHeader />
@@ -149,37 +163,94 @@ function DashboardPage() {
           className="stats-grid"
           aria-label="Trip statistics"
         >
-          <article className="stat-card">
-            <span className="stat-icon">🌍</span>
+          <button
+            className="stat-card stat-card-button"
+            type="button"
+            onClick={showTripInformation}
+          >
+            <span
+              className="stat-icon"
+              aria-hidden="true"
+            >
+              🌍
+            </span>
+
             <div>
               <strong>{stats.totalTrips}</strong>
               <span>Total trips</span>
             </div>
-          </article>
 
-          <article className="stat-card">
-            <span className="stat-icon">🗓</span>
+            <span
+              className="stat-card-arrow"
+              aria-hidden="true"
+            >
+              ↓
+            </span>
+          </button>
+
+          <button
+            className="stat-card stat-card-button"
+            type="button"
+            onClick={showTripInformation}
+          >
+            <span
+              className="stat-icon"
+              aria-hidden="true"
+            >
+              🗓️
+            </span>
+
             <div>
               <strong>{stats.upcomingTrips}</strong>
               <span>Upcoming trips</span>
             </div>
-          </article>
 
-          <article className="stat-card">
-            <span className="stat-icon">✓</span>
+            <span
+              className="stat-card-arrow"
+              aria-hidden="true"
+            >
+              ↓
+            </span>
+          </button>
+
+          <button
+            className="stat-card stat-card-button"
+            type="button"
+            onClick={showTripInformation}
+          >
+            <span
+              className="stat-icon"
+              aria-hidden="true"
+            >
+              ✓
+            </span>
+
             <div>
-              <strong>{stats.totalActivities}</strong>
+              <strong>
+                {stats.totalActivities}
+              </strong>
               <span>Planned activities</span>
             </div>
-          </article>
+
+            <span
+              className="stat-card-arrow"
+              aria-hidden="true"
+            >
+              ↓
+            </span>
+          </button>
         </section>
 
-        <section className="trips-section">
+        <section
+          className="trips-section"
+          ref={tripsSectionRef}
+        >
           <div className="section-heading">
             <div>
               <p className="eyebrow">
                 Your itineraries
               </p>
+
               <h2>My trips</h2>
             </div>
 
@@ -205,7 +276,9 @@ function DashboardPage() {
                 type="search"
                 value={searchInput}
                 onChange={(event) =>
-                  setSearchInput(event.target.value)
+                  setSearchInput(
+                    event.target.value
+                  )
                 }
                 placeholder="Search a trip or destination"
               />
@@ -221,21 +294,28 @@ function DashboardPage() {
             <div className="filter-controls">
               <label>
                 <span>Status</span>
+
                 <select
                   name="status"
                   value={filters.status}
                   onChange={handleFilterChange}
                 >
-                  <option value="">All statuses</option>
+                  <option value="">
+                    All statuses
+                  </option>
+
                   <option value="planning">
                     Planning
                   </option>
+
                   <option value="upcoming">
                     Upcoming
                   </option>
+
                   <option value="completed">
                     Completed
                   </option>
+
                   <option value="cancelled">
                     Cancelled
                   </option>
@@ -244,28 +324,41 @@ function DashboardPage() {
 
               <label>
                 <span>Category</span>
+
                 <select
                   name="category"
                   value={filters.category}
                   onChange={handleFilterChange}
                 >
-                  <option value="">All categories</option>
+                  <option value="">
+                    All categories
+                  </option>
+
                   <option value="leisure">
                     Leisure
                   </option>
+
                   <option value="business">
                     Business
                   </option>
-                  <option value="family">Family</option>
+
+                  <option value="family">
+                    Family
+                  </option>
+
                   <option value="adventure">
                     Adventure
                   </option>
-                  <option value="other">Other</option>
+
+                  <option value="other">
+                    Other
+                  </option>
                 </select>
               </label>
 
               <label>
                 <span>Sort</span>
+
                 <select
                   name="sort"
                   value={filters.sort}
@@ -274,12 +367,15 @@ function DashboardPage() {
                   <option value="startDate">
                     Date: earliest
                   </option>
+
                   <option value="-startDate">
                     Date: latest
                   </option>
+
                   <option value="title">
                     Name: A–Z
                   </option>
+
                   <option value="-createdAt">
                     Recently added
                   </option>
@@ -308,6 +404,7 @@ function DashboardPage() {
           {loading ? (
             <div className="content-loader">
               <div className="spinner" />
+
               <p>Loading your trips...</p>
             </div>
           ) : trips.length > 0 ? (
@@ -321,8 +418,12 @@ function DashboardPage() {
             </div>
           ) : (
             <div className="empty-state">
-              <div className="empty-state-icon">✈</div>
+              <div className="empty-state-icon">
+                ✈
+              </div>
+
               <h2>No trips found</h2>
+
               <p>
                 Create your first trip or change the
                 current search filters.
