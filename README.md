@@ -430,29 +430,6 @@ The backend returns consistent JSON error responses for:
 
 The React frontend converts these responses into form errors, page alerts, or toast notifications.
 
-## Recommended Live Demonstration
-
-1. Start the project with one root command.
-2. Register a new regular-user account.
-3. Log out and log back in.
-4. Create a trip using Open-Meteo destination search.
-5. Show the trip on the dashboard.
-6. Demonstrate interactive statistics, search, filters, and sorting.
-7. Open the trip.
-8. Show the live weather forecast.
-9. Add an itinerary activity.
-10. Edit the trip.
-11. Delete a temporary trip.
-12. Sign in using the administrator account.
-13. Open the administrator dashboard.
-14. Explain the MongoDB aggregation statistics.
-15. Click a status or category aggregation result.
-16. Search and filter users and trips.
-17. Demonstrate role management with a test account.
-18. Open and cancel a custom delete confirmation.
-19. Explain server-side pagination.
-20. Sign in as a regular user and show that `/admin` redirects to the dashboard.
-
 ## Key Technical Decisions
 
 - MongoDB was selected because trips naturally contain nested itinerary data.
@@ -470,7 +447,7 @@ The React frontend converts these responses into form errors, page alerts, or to
 - Weather requests use a separate backend service to keep external API logic out of React components.
 - Routes, controllers, models, middleware, services, pages, and reusable components are separated by responsibility.
 - Confirmation and toast components are reusable across administrator actions.
-- One root command starts both development servers to make the live demonstration more reliable.
+- One root command starts both development servers to simplify local development.
 
 ## Verification
 
